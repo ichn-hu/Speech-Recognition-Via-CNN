@@ -23,7 +23,7 @@ into your command line. This command will start the web service on port 22339, s
 
 By click the button, your voice will be recorded and post to the backend which has launched a pretrained model for recognition.
 
-Notice the pretrained file is `save/checkpoint.ptr`, if you want to train the model on your own, you can email me to ask for the training dataset (~2 Giga Bytes).
+Notice the pretrained file is `save/checkpoint.ptr`, since it is too large (~180 Mega Bytes), it is not included in this repo, but you can download it [[here](https://share.weiyun.com/5jTqCGw)]. If you want to train the model on your own, you can email me to ask for the training dataset (~2 Giga Bytes).
 
 ## 数字信号处理课程YC
 
