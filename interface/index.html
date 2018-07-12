@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="cache-control" content="no-cache,no-store, must-revalidate"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Project Data Collector</title>
+    <script src="js/audiodisplay.js"></script>
+    <script src="js/recorderjs/recorder.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/vue.js"></script>
+
+    <style>
+
+        /*html {*/
+        /*overflow: hidden;*/
+        /*}*/
+
+        body {
+            font: 14pt Arial, sans-serif;
+            background: lightgrey;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            margin: 0 0;
+        }
+
+        canvas {
+            display: inline-block;
+            background: #202020;
+            width: 95%;
+            height: 45%;
+            box-shadow: 0px 0px 10px blue;
+        }
+
+        #panel {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            height: 20%;
+            width: 100%;
+        }
+
+        #record {
+            height: 15vh;
+        }
+
+        #record.recording {
+            background: red;
+            background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%, lightgrey 75%, lightgrey 100%, #7db9e8 100%);
+            background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%, lightgrey 75%, lightgrey 100%, #7db9e8 100%);
+            background: radial-gradient(center, ellipse cover, #ff0000 0%, lightgrey 75%, lightgrey 100%, #7db9e8 100%);
+        }
+
+        #save,
+        #save img {
+            height: 10vh;
+        }
+
+        #save {
+            opacity: 0.25;
+        }
+
+        #save[download] {
+            opacity: 1;
+        }
+
+        #viz {
+            height: 80%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        @media (orientation: landscape) {
+            body {
+                flex-direction: row;
+            }
+
+            #panel {
+                flex-direction: column;
+                height: 100%;
+                width: 30%;
+            }
+
+            #viz {
+                height: 100%;
+                width: 70%;
+            }
+        }
+
+        #controls {
+            flex-direction: row;
+            text-align: center;
+        }
+
+        button {
+            height: 15vh;
+            width: 15vh;
+            margin: 2vh;
+        }
+    </style>
+</head>
+
+<body>
+<div id="viz" width="1024">
+    <canvas id="analyser" width="1024" height="500"></canvas>
+    <canvas id="wavedisplay" width="1024" height="500"></canvas>
+</div>
+<div id="panel">
+    <h1>孤立词语音识别系统</h1>
+    <p>支持识别：语音 余音 识别 失败 中国 忠告 北京 背景 上海 商行 复旦 饭店 Speech Speaker Signal File Print Open Close Project</p>
+    <p>请以正常语速，标准发音，念出（你有+2s的时间）测试词汇</p>
+    <div id="display" :token="token">
+        <h1>{{ token }}</h1>
+    </div>
+    <div id="controls">
+        <button id="record" @click="startRecord()">开始录音(Enter)</button>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    var myVue = new Vue({
+        el: "#panel",
+        data: {
+            tokens: "语音 余音 识别 失败 中国 忠告 北京 背景 上海 商行 复旦 饭店 Speech Speaker Signal File Print Open Close Project".split(' '),
+            process: null,
+            started: false,
+            token: 0,
+            stu_id: "0000",
+        },
+        methods: {
+            setUpToken: function (res) {
+                this.token = res;
+            },
+            startRecord: function () {
+                if (window.adplay) {
+                    window.adplay.pause();
+                }
+                if (!this.stu_id) {
+                    alert("请输入你的学号！");
+                    return;
+                }
+                if (!this.started) {
+                    console.log('record start');
+                    var icon = document.querySelector("#record");
+                    toggleRecording(icon);
+                    this.started = true;
+                    setTimeout(this.endRecord, 2000);
+                }
+            },
+            endRecord: function () {
+                console.log('record end');
+                var icon = document.querySelector('#record');
+                var m = new Date();
+                var m = new Date();
+                var dateString =
+                    m.getFullYear() + "-" +
+                    ("0" + (m.getMonth() + 1)).slice(-2) + "-" +
+                    ("0" + m.getDate()).slice(-2) + "-" +
+                    ("0" + m.getHours()).slice(-2) + "-" +
+                    ("0" + m.getMinutes()).slice(-2) + "-" +
+                    ("0" + m.getSeconds()).slice(-2);
+                window.filename = this.stu_id + '-' + dateString;
+                toggleRecording(icon);
+                this.started = false;
+            }
+        },
+        created: function () {
+            this.token = "倾听中..."
+        },
+        watch: {
+            current: function () {
+                this.token = window.token;
+            }
+        }
+    });
+    window.myVue = myVue;
+</script>
+</body>
+
+</html>
