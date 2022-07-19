@@ -41,7 +41,6 @@ Notice the pretrained file is `save/checkpoint.ptr`, since it is too large (~180
 
 课程的ppt在slides文件夹下，我主要参考的书目在reference文件夹下，重点推荐ThinkDSP，谁用谁知道。upload文件夹下有薛老师的录音，可以拿来测试模型。
 
-关于课程项目。librosa了解一下。我用librosa+pytorch完成项目，最终整体代码量在200行以内吧。然后这门课收集语音的工具是我写的 [[DSP-Audio-Collector](https://github.com/ichn-hu/DSP-Audio-Collector)]，最终32个同学提交了录音文件，排除两个质量不足的，有12000个录音文件，共2G左右，如果课程项目题目不变可以用作额外的数据集，对最终的识别效果会加分很多！我之后会放到微云上，有需求的请邮件戳我。
+关于课程项目。librosa了解一下。我用librosa+pytorch完成项目，最终整体代码量在200行以内吧。然后这门课收集语音的工具是我写的 [[DSP-Audio-Collector](https://github.com/ichn-hu/DSP-Audio-Collector)]，最终32个同学提交了录音文件，排除两个质量不足的，有12000个录音文件，共2G左右，如果课程项目题目不变可以用作额外的数据集，对最终的识别效果会加分很多！~~我之后会放到微云上，有需求的请邮件戳我。~~
 
-
-额外我整理了一波往年的期末考试题和我个人的复习笔记，以及考完之后马上把当堂的题目记录了一下，如果有需要请点star并follow然后附上id给我发邮件索取。
+~~额外我整理了一波往年的期末考试题和我个人的复习笔记，以及考完之后马上把当堂的题目记录了一下，如果有需要请点star并follow然后附上id给我发邮件索取。~~ （抱歉，因为过去时间太长，这份数据已经找不到了，因此不再提供）
